@@ -43,3 +43,4 @@ const getProductById = (id) =>
         }, 3000);
     });
 
+export { getMockProducts, mockProducts, getProductById };
