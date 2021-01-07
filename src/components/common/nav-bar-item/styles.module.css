@@ -1,0 +1,9 @@
+.navbarItem{
+    margin: 8px;
+    transition: 0.5s;
+}
+
+.navbarItem:hover{
+    cursor: pointer;
+    color: #8f8f8f;
+}
