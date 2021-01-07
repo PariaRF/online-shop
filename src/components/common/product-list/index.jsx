@@ -23,6 +23,10 @@ class ProductList extends Component {
         });
     }
 
+    addToCart = (product) => {
+        this.props.productSelected(product);
+    }
+
     renderProduct = () => {
         const { productList, isLoading } = this.state;
         if (isLoading) {
@@ -30,20 +34,22 @@ class ProductList extends Component {
         }
         return (
             <div className={styles.wrapper}>
-                    {
-                        productList.map((product, index) => {
-                            return (
-                                <div className={styles.productItem} key={index}>
-                                    <div className={styles.name}>{`Name: ${product.name}`}</div>
-                                    <div>{`Price: ${product.price}`}</div>
-                                    <button className={styles.btnCart}>Add To Cart</button>
-                                </div>
-                            );
-                        })
-                    }
+                {
+                    productList.map((product, index) => {
+                        return (
+                            <div className={styles.productItem} key={index}>
+                                <div className={styles.name}>{`Name: ${product.name}`}</div>
+                                <div>{`Price: ${product.price}`}</div>
+                                <button className={styles.btnCart} onClick={() => this.addToCart(product)}>Add To Cart</button>
+                            </div>
+                        );
+                    })
+                }
             </div>
         )
     }
+
+
     render() {
         return (
             <>
