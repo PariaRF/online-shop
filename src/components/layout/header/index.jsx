@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import NavBar from "../../common/nav-bar";
 import styles from  "./styles.module.css";
 
 class Header extends Component{
@@ -6,7 +7,7 @@ class Header extends Component{
         return(
             <>
                 <div className={styles.container}>
-                    <p>Header</p>
+                   {this.props.children}
                 </div>
             </>
         )
