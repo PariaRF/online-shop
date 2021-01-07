@@ -1,5 +1,5 @@
 import NavBar from '../../components/common/nav-bar';
-import NavBarItem from '../../components/common/nav-bar-item';
+import ProductList from '../../components/common/product-list';
 import Header from '../../components/layout/header';
 
 function MainPage() {
@@ -8,6 +8,7 @@ function MainPage() {
       <Header>
         <NavBar />
       </Header>
+      <ProductList />
     </div>
   );
 }
