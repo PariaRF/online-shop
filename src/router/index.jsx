@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import routes from "./utils/routes";
 
 class RouterProvider extends Component {
     render() {
         return (
             <BrowserRouter>
-                {routes.map((route) => {
-                    return (
-                        <Route
-                            path={routes.path}
-                            component={routes.component}
-                            exact={routes.exact}
-                        />
-                    )
-                })}
+                <Switch>
+                    {routes.map((route, index) => {
+                        return (
+                            <Route path={route.path} exact={route.exact} key={index}>
+                                {<route.component />}
+                            </Route>
+                        )
+                    })}
+                </Switch>
             </BrowserRouter>
         )
     }
