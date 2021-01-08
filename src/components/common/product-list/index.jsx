@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getMockProducts } from "../../../server";
+import Loading from "../loading";
 import styles from "./styles.module.css";
 
 class ProductList extends Component {
@@ -8,7 +9,7 @@ class ProductList extends Component {
         super(props);
         this.state = {
             productList: [],
-            isLoading: false,
+            isLoading: true,
         }
     }
     componentDidMount() {
@@ -30,7 +31,11 @@ class ProductList extends Component {
     renderProduct = () => {
         const { productList, isLoading } = this.state;
         if (isLoading) {
-            return <p>Is Loading...</p>
+            return (
+                <div className={styles.loadingWrapper}>
+                    <Loading />
+                </div>
+            )
         }
         return (
             <div className={styles.wrapper}>

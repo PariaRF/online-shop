@@ -52,3 +52,8 @@
 .name{
     color: #8a722c;
 }
+
+.loadingWrapper{
+    text-align: center;
+    margin: 100px 190px;
+}

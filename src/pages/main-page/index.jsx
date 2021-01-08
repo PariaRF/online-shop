@@ -23,11 +23,11 @@ class MainPage extends Component {
       return {
         ...prevState
       }
-    }, () => console.log(this.state.addedToCartList))
+    })
   };
 
   handleRemoveProductFromCart = (productItem) => {
-    (window.confirm("Are You Sure Remove Item?"))
+    window.confirm("Are You Sure Remove Item?")
     const newList = this.state.addedToCartList.filter((product) => {
       return product.id !== productItem.id;
     })
