@@ -3,7 +3,7 @@ const pathes = {
     PROFILE: "/profile",
     PRODUCT: "/product",
     FORBIDDEN: "/forbidden",
-    NOT_FOUND: "/*",
+    NOT_FOUND: "*",
 }
 
 export default pathes;
