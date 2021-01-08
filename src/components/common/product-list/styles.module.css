@@ -39,6 +39,7 @@
     text-align: right;
     outline: none;
     transition: 1s;
+    box-shadow:0 1px 15px #8a722c, 0 1px 8px #8a722c;
 
 }
 
@@ -51,6 +52,9 @@
 
 .name{
     color: #8a722c;
+    font-weight: bold;
+    margin: 9px;
+    
 }
 
 .loadingWrapper{

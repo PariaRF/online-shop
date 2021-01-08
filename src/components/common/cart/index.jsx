@@ -7,8 +7,10 @@ class Cart extends Component {
         this.props.onItemRemove && this.props.onItemRemove(productItem);
     }
     render() {
+        const {show} = this.props;
         return (
             <>
+            {show &&
                 <div className="cart-container">
                     {this.props.list.map((productItem) => {
                         return (
@@ -20,7 +22,7 @@ class Cart extends Component {
                             </div>
                         )
                     })}
-                </div>
+                </div>}
             </>
         )
     }

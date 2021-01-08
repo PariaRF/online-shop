@@ -5,11 +5,19 @@ import ProductList from '../../components/common/product-list';
 import Header from '../../components/layout/header';
 import styles from "./styles.module.css";
 
+
+const navBarItem = {
+  HOME: "home",
+  CART: "cart",
+  PROFILE: "profile",
+};
+
 class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addedToCartList: [],
+      showCart: false,
     }
   }
 
@@ -23,7 +31,7 @@ class MainPage extends Component {
       return {
         ...prevState
       }
-    })
+    }, console.log(this.state.addedToCartList))
   };
 
   handleRemoveProductFromCart = (productItem) => {
@@ -31,17 +39,53 @@ class MainPage extends Component {
     const newList = this.state.addedToCartList.filter((product) => {
       return product.id !== productItem.id;
     })
-    this.setState({addedToCartList: newList})
+    this.setState({ addedToCartList: newList })
   }
 
-  render() {
+  handleOnHomeClick = () => {
+    alert("Click On Home");
+  }
 
+  handleOnCartClick = () => {
+    this.setState((prevState) => {
+      return {
+        showCart: !prevState.showCart,
+      }
+    })
+  }
+
+  handleOnProfileClick = () => {
+    alert("Click On profile");
+  }
+
+  handleOnNavItemClick = (itemName) => {
+    if (itemName === navBarItem.HOME) {
+      this.handleOnHomeClick();
+    }
+    if (itemName === navBarItem.CART) {
+      this.handleOnCartClick();
+    }
+    if (itemName === navBarItem.PROFILE) {
+      this.handleOnProfileClick();
+    }
+  }
+
+
+
+  render() {
+    const { addedToCartList, showCart } = this.state;
     return (
       <div>
         <Header>
-          <NavBar />
+          <NavBar
+            onItemClick={(itemName) => this.handleOnNavItemClick(itemName)} 
+            cartItemNumber={addedToCartList.length}/>
         </Header>
-        <Cart list={this.state.addedToCartList} onItemRemove={this.handleRemoveProductFromCart} />
+        <Cart
+          list={addedToCartList}
+          onItemRemove={this.handleRemoveProductFromCart}
+          show={showCart} 
+          />
         <div className={styles.mainPage}>
           <ProductList productSelected={this.handleOnProductSelect} />
         </div>
