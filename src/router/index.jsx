@@ -29,11 +29,11 @@ class RouterProvider extends Component {
         }, 100);
     }
 
-    handleRouteEnter =(route) =>{
-        const {isAuthenticated} = this.state;
-        if(isAuthenticated){
-            return <route.component />;
-        }else{
+    handleRouteEnter = (route, props) => {
+        const { isAuthenticated } = this.state;
+        if (isAuthenticated) {
+            return <route.component routeProps={props} />;
+        } else {
             return <Redirect to="/401" />;
         }
 
@@ -52,11 +52,14 @@ class RouterProvider extends Component {
                     {routes.map((route, index) => {
                         return (
                             <Route path={route.path} exact={route.exact} key={index}>
-                                { route.needAuth 
-                                ? 
-                                (this.handleRouteEnter(route)) 
-                                : 
-                                (<route.component />)}
+                                {(props) => {
+                                    return route.needAuth
+                                        ?
+                                        (this.handleRouteEnter(route , props))
+                                        :
+                                        (<route.component routeProps={props}/>)
+                                }
+                                }
                             </Route>
                         )
                     })}
