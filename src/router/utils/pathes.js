@@ -2,7 +2,7 @@ const pathes = {
     INDEX: "/",
     PROFILE: "/profile",
     PRODUCT: "/product",
-    FORBIDDEN: "/forbidden",
+    FORBIDDEN: "/401",
     NOT_FOUND: "*",
 }
 
