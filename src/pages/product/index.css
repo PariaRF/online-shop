@@ -1,0 +1,25 @@
+.product-wrapper{
+    margin: 8px auto;
+    max-width: 900px;
+    /* text-align: center; */
+}
+
+.loading-wrapper{
+    text-align: center;
+    margin: 190px 190px;
+}
+
+.container{
+    width: 150px;
+    height: 150px;
+    background-color: #1f1e1c;
+    padding: 17px;
+    margin-top: 70px;
+    box-shadow: 0 1px 15px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
+    color: #8a722c;
+    border-radius: 15px;
+}
+
+.text{
+    margin-top: 40px;
+}

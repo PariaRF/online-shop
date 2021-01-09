@@ -31,7 +31,7 @@ class MainPage extends Component {
       return {
         ...prevState
       }
-    }, console.log(this.state.addedToCartList))
+    })
   };
 
   handleRemoveProductFromCart = (productItem) => {
