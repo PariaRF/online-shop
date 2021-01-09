@@ -54,7 +54,15 @@
     color: #8a722c;
     font-weight: bold;
     margin: 9px;
-    
+    text-decoration: none;
+}
+
+.price{
+    color: #8f8f8f;
+}
+
+.link{
+    text-decoration: none;
 }
 
 .loadingWrapper{

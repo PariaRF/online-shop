@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getMockProducts } from "../../../server";
 import Loading from "../loading";
 import styles from "./styles.module.css";
@@ -43,8 +44,10 @@ class ProductList extends Component {
                     productList.map((product, index) => {
                         return (
                             <div className={styles.productItem} key={index}>
+                                <Link to={`/product/${product.id}`} className={styles.link}>
                                 <div className={styles.name}>{`Name: ${product.name}`}</div>
-                                <div>{`Price: ${product.price}`}</div>
+                                <div className={styles.price}>{`Price: ${product.price}`}</div>
+                                </Link>
                                 <button className={styles.btnCart} onClick={() => this.addToCart(product)}>Add To Cart</button>
                             </div>
                         );
