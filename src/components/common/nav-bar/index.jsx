@@ -1,46 +1,52 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import NavBarItem from "../nav-bar-item";
+import "./index.css";
 
 const navBarItem = {
-    HOME : "home",
+    HOME: "home",
     CART: "cart",
     PROFILE: "profile",
 };
 
 class NavBar extends Component {
 
-    handleOnHomeClick = () =>{
+    handleOnHomeClick = () => {
         alert("Click On Home");
     }
 
-    handleOnCartClick = (itemName) =>{
-        const {onItemClick} = this.props;
+    handleOnCartClick = (itemName) => {
+        const { onItemClick } = this.props;
         onItemClick(itemName);
     }
 
-    handleOnProfileClick = () =>{
+    handleOnProfileClick = () => {
         alert("Click On profile");
     }
 
-    handleOnNavBarItemClick = (itemName) =>{
-        if( itemName === navBarItem.HOME){
+    handleOnNavBarItemClick = (itemName) => {
+        if (itemName === navBarItem.HOME) {
             this.handleOnHomeClick();
         }
-        if(itemName === navBarItem.CART){
+        if (itemName === navBarItem.CART) {
             this.handleOnCartClick(itemName);
         }
-        if(itemName === navBarItem.PROFILE){
+        if (itemName === navBarItem.PROFILE) {
             this.handleOnProfileClick();
         }
     }
 
     render() {
-        const {cartItemNumber} = this.props;
+        const { cartItemNumber } = this.props;
         return (
             <>
-                <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.HOME)}>Home</NavBarItem>
+                <Link to="/" className="link">
+                    <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.HOME)}>Home</NavBarItem>
+                </Link>
                 <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.CART)}>Cart {cartItemNumber}</NavBarItem>
-                <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.PROFILE)}>Profile</NavBarItem>
+                <Link to="/profile" className="link">
+                    <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.PROFILE)}>Profile</NavBarItem>
+                </Link>
             </>
         )
     }
