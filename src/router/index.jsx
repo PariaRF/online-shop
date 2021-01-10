@@ -1,36 +1,27 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import checkAuth from "../auth-mock/checkAuth";
 import routes from "./utils/routes";
 
 const token = checkAuth(true);
 
-class RouterProvider extends Component {
+const RouterProvider =()=> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isAuthenticated: null,
-        }
-    };
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-    componentDidMount() {
+    useEffect(() =>{
         setTimeout(() => {
             if (token) {
-                this.setState({
-                    isAuthenticated: true,
-                })
+               setIsAuthenticated(true);
             } else {
-                this.setState({
-                    isAuthenticated: false,
-                })
+                setIsAuthenticated(false);
             }
 
         }, 100);
-    }
+    },[])
+   
 
-    handleRouteEnter = (route, props) => {
-        const { isAuthenticated } = this.state;
+    const handleRouteEnter = (route, props) => {
         if (isAuthenticated) {
             return <route.component routeProps={props} />;
         } else {
@@ -38,10 +29,6 @@ class RouterProvider extends Component {
         }
 
     }
-
-    render() {
-
-        const { isAuthenticated } = this.state;
 
         if (isAuthenticated === null) {
             return <p>Please Wait...</p>
@@ -55,7 +42,7 @@ class RouterProvider extends Component {
                                 {(props) => {
                                     return route.needAuth
                                         ?
-                                        (this.handleRouteEnter(route , props))
+                                        (handleRouteEnter(route , props))
                                         :
                                         (<route.component routeProps={props}/>)
                                 }
@@ -66,7 +53,6 @@ class RouterProvider extends Component {
                 </Switch>
             </BrowserRouter>
         )
-    }
 }
 
 export default RouterProvider;

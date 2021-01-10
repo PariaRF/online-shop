@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ProfilePage extends Component{
-    render(){
+const ProfilePage = ()=>{
         return (
             <>
                 <h1>Profile Page</h1>
             </>
         )
-    }
 }
 
 export default ProfilePage;

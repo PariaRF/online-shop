@@ -1,36 +1,29 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getMockProducts } from "../../../server";
 import Loading from "../loading";
 import styles from "./styles.module.css";
 
-class ProductList extends Component {
+const ProductList = ({ productSelected }) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            productList: [],
-            isLoading: true,
-        }
-    }
-    componentDidMount() {
-        this.getDataFromApi();
-    };
+    const [productList, setProductList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    getDataFromApi = async () => {
+    useEffect(() => {
+        getDataFromApi();
+    }, []);
+
+    const getDataFromApi = async () => {
         const result = await getMockProducts;
-        this.setState({
-            productList: result,
-            isLoading: false,
-        });
+        setProductList(result);
+        setIsLoading(false);
     }
 
-    addToCart = (product) => {
-        this.props.productSelected(product);
+    const addToCart = (product) => {
+        productSelected(product);
     }
 
-    renderProduct = () => {
-        const { productList, isLoading } = this.state;
+    const renderProduct = () => {
         if (isLoading) {
             return (
                 <div className={styles.loadingWrapper}>
@@ -45,10 +38,10 @@ class ProductList extends Component {
                         return (
                             <div className={styles.productItem} key={index}>
                                 <Link to={`/product/${product.id}`} className={styles.link}>
-                                <div className={styles.name}>{`Name: ${product.name}`}</div>
-                                <div className={styles.price}>{`Price: ${product.price}`}</div>
+                                    <div className={styles.name}>{`Name: ${product.name}`}</div>
+                                    <div className={styles.price}>{`Price: ${product.price}`}</div>
                                 </Link>
-                                <button className={styles.btnCart} onClick={() => this.addToCart(product)}>Add To Cart</button>
+                                <button className={styles.btnCart} onClick={() => addToCart(product)}>Add To Cart</button>
                             </div>
                         );
                     })
@@ -58,15 +51,13 @@ class ProductList extends Component {
     }
 
 
-    render() {
-        return (
-            <>
-                <h1 className={styles.title}>Product List</h1>
-                <hr />
-                {this.renderProduct()}
-            </>
-        )
-    }
+    return (
+        <>
+            <h1 className={styles.title}>Product List</h1>
+            <hr />
+            {renderProduct()}
+        </>
+    )
 }
 
 export default ProductList;

@@ -1,31 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.css";
 
-class Cart extends Component {
+const Cart = ({ onItemRemove, show, list }) => {
 
-    removeFromCart = (productItem)=>{
-        this.props.onItemRemove && this.props.onItemRemove(productItem);
+    const removeFromCart = (productItem) => {
+        onItemRemove && onItemRemove(productItem);
     }
-    render() {
-        const {show} = this.props;
-        return (
-            <>
+    return (
+        <>
             {show &&
                 <div className="cart-container">
-                    {this.props.list.map((productItem) => {
+                    {list.map((productItem) => {
                         return (
                             <div className="product-in-cart" key={productItem.id}>
                                 <p>{productItem.name}</p>
                                 <p>{productItem.price}</p>
                                 {/* {productItem.hasOff && <p>productItem.price</p>} */}
-                                <button className="btn-remove" onClick={() => this.removeFromCart(productItem)}>Remove Item</button>
+                                <button className="btn-remove" onClick={() => removeFromCart(productItem)}>Remove Item</button>
                             </div>
                         )
                     })}
                 </div>}
-            </>
-        )
-    }
+        </>
+    )
 }
 
 export default Cart;

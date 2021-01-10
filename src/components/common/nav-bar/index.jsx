@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import NavBarItem from "../nav-bar-item";
 import "./index.css";
@@ -9,47 +9,43 @@ const navBarItem = {
     PROFILE: "profile",
 };
 
-class NavBar extends Component {
+const NavBar = ({ onItemClick, cartItemNumber }) => {
 
-    handleOnHomeClick = () => {
+    const handleOnHomeClick = () => {
         alert("Click On Home");
     }
 
-    handleOnCartClick = (itemName) => {
-        const { onItemClick } = this.props;
+    const handleOnCartClick = (itemName) => {
         onItemClick(itemName);
     }
 
-    handleOnProfileClick = () => {
+    const handleOnProfileClick = () => {
         alert("Click On profile");
     }
 
-    handleOnNavBarItemClick = (itemName) => {
+    const handleOnNavBarItemClick = (itemName) => {
         if (itemName === navBarItem.HOME) {
-            this.handleOnHomeClick();
+            handleOnHomeClick();
         }
         if (itemName === navBarItem.CART) {
-            this.handleOnCartClick(itemName);
+            handleOnCartClick(itemName);
         }
         if (itemName === navBarItem.PROFILE) {
-            this.handleOnProfileClick();
+            handleOnProfileClick();
         }
     }
 
-    render() {
-        const { cartItemNumber } = this.props;
-        return (
-            <>
-                <Link to="/" className="link">
-                    <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.HOME)}>Home</NavBarItem>
-                </Link>
-                <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.CART)}>Cart {cartItemNumber}</NavBarItem>
-                <Link to="/profile" className="link">
-                    <NavBarItem onClick={() => this.handleOnNavBarItemClick(navBarItem.PROFILE)}>Profile</NavBarItem>
-                </Link>
-            </>
-        )
-    }
+    return (
+        <>
+            <Link to="/" className="link">
+                <NavBarItem onClick={() => handleOnNavBarItemClick(navBarItem.HOME)}>Home</NavBarItem>
+            </Link>
+            <NavBarItem onClick={() => handleOnNavBarItemClick(navBarItem.CART)}>Cart {cartItemNumber}</NavBarItem>
+            <Link to="/profile" className="link">
+                <NavBarItem onClick={() => handleOnNavBarItemClick(navBarItem.PROFILE)}>Profile</NavBarItem>
+            </Link>
+        </>
+    )
 }
 
 export default NavBar;

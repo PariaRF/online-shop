@@ -1,42 +1,33 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../components/common/loading";
 import { getProductById } from "../../server";
 import "./index.css";
 
-class ProductPage extends Component {
+const ProductPage =({routeProps})=> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: null,
-            isLoading: true,
-        }
-    }
+const [data, setData] = useState(null);
+const [isLoading , setIsLoadung] = useState(true);
 
-    componentDidMount() {
-        this.getProductData();
-    }
-
-    getProductData = async () => {
-        const { routeProps } = this.props;
-        const { match } = routeProps;
-        const { params } = match;
+useEffect(() =>{
+    getProductData();
+},[]);
+    
+    const getProductData = async () => {
+        // const { routeProps } = this.props;
+        // const { match } = routeProps;
+        // const { params } = match;
         try {
-            const data = await getProductById(Number(params.id));
-            this.setState({
-                data,
-                isLoading: false
-            })
+            const data = await getProductById(Number(routeProps.match.params.id));
+            setData(data);
+            setIsLoadung(false);
         } catch (e) {
             alert("Product By This Id Nout Found");
         } finally {
-            this.setState({
-                isLoading: false,
-            })
+            setIsLoadung(false);
         }
     }
 
-    handleDataByID = (isLoading, data) => {
+    const handleDataByID = (isLoading, data) => {
         if (isLoading) {
             return <div className="loading-wrapper"><Loading /></div>
         }
@@ -55,17 +46,14 @@ class ProductPage extends Component {
         )
     }
 
-    render() {
-        const { isLoading, data } = this.state;
         return (
             <>
 
                 <div className="product-wrapper">
-                    {this.handleDataByID(isLoading, data)}
+                    {handleDataByID(isLoading, data)}
                 </div>
             </>
         )
-    }
 }
 
 export default ProductPage;

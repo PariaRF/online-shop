@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ForbiddenPage extends Component {
-    render() {
-        return (
-            <>
-                <h1>Forbidden Page</h1>
-            </>
-        )
-    }
+const ForbiddenPage = () => {
+    return (
+        <>
+            <h1>Forbidden Page</h1>
+        </>
+    )
 }
 
 export default ForbiddenPage;
